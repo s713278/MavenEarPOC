@@ -67,13 +67,37 @@
 									<version>0.0.1-SNAPSHOT</version>
 									<type>jar</type>
 								</artifactItem>
-								
 							</artifactItems>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-app-inf-lib</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}/APP-INF/lib</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/resources/lib</directory>
+                                    <!-- Specify the directory where your additional files are located -->
+                                    <includes>
+                                        <include>*.jar</include>
+                                        <!-- Include specific files or use wildcards -->
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
 		</plugins>
 	</build>
